@@ -29,4 +29,9 @@ void print_title(){
 void menu(){
     system("clear");
     printf("%30s   The Game!\n", TITLE);
+    printf("1. Jugar!\n");
+    printf("2. Cargar Partida\n");
+    printf("3. Instrucciones\n");
+    printf("4. Table de puntajes\n");
+    printf("0. Salir del juego\n");
 }
