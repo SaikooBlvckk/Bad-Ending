@@ -3,25 +3,23 @@
 #include <string.h>
 #include <stdlib.h>
 
+// Verification if is Windows or Linux
+
 #ifdef _WIN32
 	#include <windows.h>
 #else
 	#include <unistd.h>
 #endif
 
-void
-my_wait(size_t secs)
-{
+void my_wait(){
 	#ifdef _WIN32
-		usleep(secs);
+		Sleep(100);
 	#else
-		usleep(secs);
+		usleep(100000);
 	#endif
 }
 
-void
-print_progress(size_t count, size_t max)
-{
+void print_progress(size_t count, size_t max) {
 	const char prefix[] = "Loading Game: [";
 	const char suffix[] = "]";
 	const size_t prefix_length = sizeof(prefix) - 1;
@@ -51,6 +49,6 @@ void loadingBar()
 	for (; num_secs <= max_secs; ++num_secs)
 	{
 		print_progress(num_secs, max_secs);
-        my_wait(100000);
+        my_wait();
 	}
 }

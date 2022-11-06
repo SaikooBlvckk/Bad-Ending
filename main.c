@@ -6,8 +6,10 @@
 
 #ifdef _WIN32
 	#include <windows.h>
+    #define C "cls"
 #else
 	#include <unistd.h>
+    #define C "clear"
 #endif
 
 #define TITLE  "### Bad Ending ###"
@@ -20,15 +22,15 @@ int main(){
 }
 
 void print_title(){
-    system("clear");
+    system(C);
     printf("%30s\n", TITLE);
     loadingBar();
     printf("\n");
 }
 
 void menu(){
-    system("clear");
-    printf("%30s   The Game!\n", TITLE);
+    system(C);
+    printf("%30s\n", TITLE);
     printf("1. Jugar!\n");
     printf("2. Cargar Partida\n");
     printf("3. Instrucciones\n");

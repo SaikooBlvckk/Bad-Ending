@@ -2,3 +2,4 @@
 main
 open.c
 .vscode
+*.exe
