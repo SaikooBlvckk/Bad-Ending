@@ -36,4 +36,33 @@ void menu(){
     printf("3. Instrucciones\n");
     printf("4. Table de puntajes\n");
     printf("0. Salir del juego\n");
+    select_option();
+}
+
+void select_option(){
+    int choice = -1;
+    while (choice != 0){
+        printf("Seleccione una opción\n");
+        scanf("%d", &choice);
+        switch(choice){
+            case 1:
+                printf("Jugar!\n");
+                break;
+            case 2:
+                printf("Cargar Partida!\n");
+                break;
+            case 3:
+                printf("Instrucciones!\n");
+                break;
+            case 4:
+                printf("Tabla de puntajes!\n");
+                break;
+            case 0:
+                printf("Saliendo del juego :(\n");
+                return;
+            default:
+                printf("Opción no valida!\n");
+                break;
+        }
+    }
 }

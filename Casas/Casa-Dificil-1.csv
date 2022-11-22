@@ -1,8 +1,8 @@
 habitacion,conexion arriba,conexion abajo,conexion izq,conexion der, items, cofre
-Dormitorio1,living,null,baño1,garaje, computador/juegos/consola/libros/camara/ropa,NULL
-Dormitorio2,baño2,garaje,living,null, computador/TV/libros/joyas/ropa/lampara,NULL
-Dormitorio3,null,null,null,living, libros/joyas/camara/ropa/cajafuerte, pasaporte/dinero/joyas/escrituras/llaves 
-Baño1,nul,null,null,dormitorio1, lampara/espejo,NULL
-Baño2,null,dormitorio2,comedor,null, lampara/espejo,NULL
+Dormitorio1,living,NULL,baño1,garaje, computador/juegos/consola/libros/camara/ropa,NULL
+Dormitorio2,baño2,garaje,living,NULL, computador/TV/libros/joyas/ropa/lampara,NULL
+Dormitorio3,NULL,NULL,NULL,living, libros/joyas/camara/ropa/cajafuerte, pasaporte/dinero/joyas/escrituras/llaves 
+Baño1,nul,NULL,NULL,dormitorio1, lampara/espejo,NULL
+Baño2,NULL,dormitorio2,comedor,NULL, lampara/espejo,NULL
 Livingcomedor,comedor,dormitorio1,dormitorio3,dormitorio2, pintura/TV/libros/electrodomesticos,NULL
-Garaje,dormitorio2,null,dormitorio1,null, herramientas/auto/bicicleta/materiales,NULL
+Garaje,dormitorio2,NULL,dormitorio1,NULL, herramientas/auto/bicicleta/materiales,NULL
