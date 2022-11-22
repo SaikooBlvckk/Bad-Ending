@@ -2,6 +2,19 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+#include "list.c"
+#include "graph.c"
+
+typedef struct{
+  char name[30];
+  List items;
+}habitacion;
+
+typedef struct{
+  char name[30];
+  int weight;
+  int price; 
+}item;
 
 const char *get_csv_field_coma(char *tmp, int k) {
   int open_mark = 0;
@@ -87,7 +100,7 @@ const char *get_csv_field_slash(char *tmp, int k) {
   return NULL;
 }
 
-void import_file(char *file) {
+void import_file(char *file, GraphList *Graph) {
   FILE *fp = fopen(file, "r");
 
   char line[1024];
@@ -118,12 +131,12 @@ void import_file(char *file) {
 }
 
 int main(){
-    int i = 1;
-    char *file;
+  int i = 1;
+  char *file;
+  GraphList *Graph = createGraphList();
+  file = (char *)malloc(sizeof(char) * 50);
 
-    file = (char *)malloc(sizeof(char) * 50);
-
-    file = "Casa-Dificil-1.csv";
-    printf("Cargando %s\n", file);
-    import_file(file);
+  file = "./Casas/Casa-Dificil-1.csv";
+  printf("Cargando %s\n", file);
+  import_file(file, Graph);
 }
