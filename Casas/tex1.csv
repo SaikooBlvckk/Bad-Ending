@@ -1,5 +1,7 @@
-habitacion donde esta, conexion arriba, conexion abajo, conexion izq,conexion derecha,items
+habitacion donde esta, conexion arriba, conexion abajo, conexion izq,conexion derecha,items,cofre
 
-Dormitorio1 ,cocina ,baño ,livin , dormitorio2, celular/pc/tele/ropa/jklasdfhglajksdhfg
+Dormitorio1 ,cocina ,baño1 ,livin , dormitorio2, celular/pc/tele/ropa/jklasdfhglajksdhfg,NULL
 
-Living ,cocina ,baño1 ,Dormitorio1 ,baño2 , dormitorio2, celular/pc/tele/cuadros/esculturas/tragosdeimportacion ,cofre/joyas/testamento/dinero
+Living ,cocina ,baño1 ,Dormitorio1 ,baño2 ,celular/pc/tele/cuadros/esculturas/tragosdeimportacion ,cofre/joyas/testamento/dinero
+
+ASÍ ES COMO IRÁN LAS CASAS(LO DE ARRIBA) MODIFICAR EN UN NUEVO ARCHIVO!,NULL,NULL,NULL,NULL,NULL,NULL
