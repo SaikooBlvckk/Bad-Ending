@@ -2,7 +2,7 @@ habitacion,conexion arriba,conexion abajo,conexion izq,conexion der,items,cofre
 Dormitorio1,living,NO,baño1,garaje,computador/juegos/consola/libros/camara/ropa ,NO 
 Dormitorio2,baño2,garaje,living,NO,computador/TV/libros/joyas/ropa/lampara ,NO 
 Dormitorio3,NO,NO,NO,living,libros/joyas/camara/ropa/cajafuerte ,pasaporte/dinero/joyas/escrituras/llaves 
-Baño1,nul,NO,NO,dormitorio1,lampara/espejo ,NO 
+Baño1,NO,NO,NO,dormitorio1,lampara/espejo ,NO 
 Baño2,NO,dormitorio2,comedor,NO,lampara/espejo ,NO 
 Living,comedor,dormitorio1,dormitorio3,dormitorio2,pintura/TV/libros/electrodomesticos ,NO 
 Comedor,NO,living,NO,Baño2,vasija/vajilla/electrodomesticos ,NO 
