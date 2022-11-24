@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "loadingBar.c"
 #include "Functions.h"
+#include "charge-house.c"
 
 // Verification if is Windows or Linux
 
@@ -69,6 +70,7 @@ void select_option(){
 }
 
 void play_game(){
+    importHouse();
     printf("Aquí se imprimirá el menu de selección de dificultades\n");
     printf("se imprimirán 3 casas de la misma dificultad (facil al inicio del juego) para que el usuario seleccione una\n");
     printf("se seleccionara una casa por el numero que se le asigne a esta (1 , 2 o 3)\n");

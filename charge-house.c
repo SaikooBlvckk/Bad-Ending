@@ -7,7 +7,8 @@
 
 typedef struct{
   char name[30];
-  List items;
+  List *items;
+  List *cofre;
 
   char up[30];
   char down[30];
@@ -19,9 +20,9 @@ typedef struct{
   char name[30];
   int weight;
   int price; 
-}item;
+}Item;
 
-const char *get_csv_field_coma(char *tmp, int k) {
+char *get_csv_field_coma(char *tmp, int k) {
   int open_mark = 0;
   char *ret = (char *)malloc(100 * sizeof(char));
   int ini_i = 0, i = 0;
@@ -63,7 +64,7 @@ const char *get_csv_field_coma(char *tmp, int k) {
   return NULL;
 }
 
-const char *get_csv_field_slash(char *tmp, int k) {
+char *get_csv_field_slash(char *tmp, int k) {
   int open_mark = 0;
   char *ret = (char *)malloc(100 * sizeof(char));
   int ini_i = 0, i = 0;
@@ -105,10 +106,6 @@ const char *get_csv_field_slash(char *tmp, int k) {
   return NULL;
 }
 
-void createHouse(HashMap *Map, Room *room){
-  insertMap(Map, room->name, room);
-}
-
 void import_file(char *file, HashMap *Map) {
   FILE *fp = fopen(file, "r");
 
@@ -117,31 +114,61 @@ void import_file(char *file, HashMap *Map) {
   char *aux2;
   fgets(line, 1023, fp);
   while (fgets(line, 1023, fp) != NULL) {
-    //int j = 0;
+    int j = 0;
     Room *room = (Room *)malloc(sizeof(Room));
+    room->items = createList();
+    room->cofre = createList();
+    aux = (char *)malloc(sizeof(char));
+    aux2 = (char *)malloc(sizeof(char));
     strcpy(room->name, get_csv_field_coma(line, 0));
     strcpy(room->up, get_csv_field_coma(line, 1));
     strcpy(room->down, get_csv_field_coma(line, 2));
     strcpy(room->left, get_csv_field_coma(line, 3));
     strcpy(room->right, get_csv_field_coma(line, 4));
 
-    createHouse(Map, room);
-
-    /*if(i == 5 || i == 6){
-        while (aux2 != NULL){
-          if (get_csv_field_slash(aux, j) != NULL){
-            strcpy(aux2, get_csv_field_slash(aux, j));
-            printf("%s ", aux2);
-            j++;
-          }else aux2 = NULL;
-        }
-      printf("\n");
-    }*/
+    strcpy(aux, get_csv_field_coma(line, 5));
+    printf("se agrega %s\n", room->name);
+    printf("wail\n");
+    while (aux2 != NULL){
+      printf("entra al wail\n");
+      Item *items = (Item *)malloc(sizeof(Item));
+      printf("asigna memoria\n");
+      if (get_csv_field_slash(aux, j) != NULL){
+        printf("entra al if\n");
+        strcpy(items->name, get_csv_field_slash(aux, j));
+        printf("strincopi\n");
+        items->price = rand() % (100 + 1)* 100;
+        printf("ciopre\n"); 
+        items->weight = rand() % (100);
+        printf("sope\n");
+        pushBack(room->items, items);
+        printf("pushbak\n");
+        j++;
+      }else aux2 = NULL;
+      printf("%d ", j);
+    }
+    printf("\nse agregan items\n");
+    j = 0;
+    aux2 = "a";
+    strcpy(aux, get_csv_field_coma(line, 6));
+    if (strcmp(aux, "NO ") != 0){
+      while (aux2 != NULL){
+        Item *items = (Item *)malloc(sizeof(Item));
+        if (get_csv_field_slash(aux, j) != NULL){
+          strcpy(items->name, get_csv_field_slash(aux, j));
+          items->price = rand() % (100 + 1)* 100; 
+          items->weight = rand() % (50); 
+          pushBack(room->cofre, items);
+          j++;
+        }else aux2 = NULL;
+      }
+    }else pushBack(room->cofre, get_csv_field_slash(aux, 0));
+    printf("se agregan items del cofre\n");
+    insertMap(Map, room->name, room);
   }
-  printf("\n");
 }
 
-int main(){
+void main(){
   int i = 1;
   char *file;
   HashMap *Map = createMap(10);
@@ -150,12 +177,6 @@ int main(){
   file = "./Casas/Casa-Dificil-1.csv";
   printf("Cargando %s\n", file);
   import_file(file, Map);
-
-  Pair *aux = firstMap(Map);
-  Room *room = (Room *)malloc(sizeof(Room));
-  do{
-    room = aux->value;
-    printf("%s\n arriba: %s\n abajo: %s\n izquierda: %s\n derecha: %s\n", room->name, room->up, room->down, room->left, room->right);
-    aux = nextMap(Map);
-  }while(aux != NULL);
+  printf("se cargaron los archivos!:)\n");
+  return 0;
 }
