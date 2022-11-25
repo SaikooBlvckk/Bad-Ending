@@ -1,5 +1,6 @@
 #ifndef Functions_h
 #define Functions_h
+#include "hashmap.h"
 
 void menu();
 void print_title();
@@ -10,5 +11,6 @@ void score_table();
 void bad_ending();
 int printRoomItems();
 void printOtherRooms();
+Pair *searchRoom();
 
 #endif /* Funtions_h*/

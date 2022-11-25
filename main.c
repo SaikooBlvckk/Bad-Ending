@@ -119,7 +119,7 @@ void bad_ending(HashMap *Map){
         i++;
         if (i == choice-1) break;
         else aux = nextMap(Map);
-    }while(i == choice);
+    }while(i != choice);
     room = aux->value;
 
     printf("Eliges entrar por %s... Tal vez sea la mejor opcion\n", room->name);
