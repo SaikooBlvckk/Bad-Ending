@@ -149,7 +149,7 @@ void import_file(char *file, HashMap *Map) {
   }
 }
 
-void importHouse(){
+HashMap *importHouse(){
   int i = 1;
   char *file;
   HashMap *Map = createMap(10);
@@ -157,4 +157,6 @@ void importHouse(){
 
   file = "./Casas/Casa-Dificil-1.csv";
   import_file(file, Map);
+
+  return Map;
 }
