@@ -1,6 +1,7 @@
 #ifndef Functions_h
 #define Functions_h
 #include "hashmap.h"
+#include "chargeHouse.h"
 
 void menu();
 void print_title();
@@ -12,5 +13,8 @@ void bad_ending();
 int printRoomItems();
 void printOtherRooms();
 Pair *searchRoom();
+Room *changeRoom();
+void sleepProgram();
+void printBag();
 
 #endif /* Funtions_h*/

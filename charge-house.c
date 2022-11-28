@@ -4,23 +4,7 @@
 #include <sys/stat.h>
 #include "list.c"
 #include "hashmap.c"
-
-typedef struct{
-  char name[30];
-  List *items;
-  List *cofre;
-
-  char up[30];
-  char down[30];
-  char right[30];
-  char left[30];
-}Room;
-
-typedef struct{
-  char name[30];
-  int weight;
-  int price; 
-}Item;
+#include "chargeHouse.h"
 
 char *get_csv_field_coma(char *tmp, int k) {
   int open_mark = 0;
