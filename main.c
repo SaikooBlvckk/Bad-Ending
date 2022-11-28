@@ -17,6 +17,11 @@
 
 #define TITLE  "### Bad Ending ###"
 
+typedef struct{
+    char Name[30];
+    HashMap *PassedLevel;
+}Player;
+
 // Main Code
 
 int main(){
@@ -50,7 +55,11 @@ void select_option(){
         switch(choice){
             case 1:
                 printf("Jugar!\n");
-                play_game();
+                Player *pl = (Player *)Malloc(sizeof(Player));
+                pl->PassedLevel = createMap(1);
+                printf("Ingrese su nombre de usuario\n");
+                scanf("%s", &pl->Name);
+                play_game(pl);
                 break;
             case 2:
                 printf("Cargar Partida!\n");
@@ -71,13 +80,29 @@ void select_option(){
     }
 }
 
-void play_game(){
-    char enter[5];
-    scanf("%s", &enter);
-    printf("se jugara la Casa Dificil 1 (nombre de prueba)\n");
+void play_game(Player *pl){
+    char file[50];
+    int choice, choice2;
+    printf("Seleccione el nivel que desea jugar\n");
+    printf("1-. Casa nivel facil\n");
+    printf("2-. Casa nivel medio\n");
+    printf("3-. Casa nivel dificil\n");
+    scanf("%d",&choice);
+    switch (choice){
+        case 1:
+            strcpy(file, "./Casas/Casa-Facil-1.csv");
+        case 2:
+            strcpy(file, "./Casas/Casa-Medio-1.csv");
+        case 3:
+            strcpy(file, "./Casas/Casa-Dificil-1.csv");
+    }
     sleepProgram();
-    HashMap *Map = importHouse();
+    HashMap *Map = importHouse(file);
     bad_ending(Map);
+    insertMap(pl->PassedLevel, file, file);
+    printf("Quieres seguir jugando?\n");
+    printf("1.- Si\n2.- No\n");
+    if(choice2 == 1) play_game(pl);
 }
 
 void load_game(){

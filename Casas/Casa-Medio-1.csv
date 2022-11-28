@@ -1,6 +1,6 @@
 habitacion,conexion arriba,conexion abajo,conexion izq,conexion der, items, cofre
-Dormitorio1,living,baño,dormitorio2,NULL, lampara/tocadisco/vinilos/joyero/radio,NULL
-Dormitorio2,living,baño,NULL,dormitorio1, lampara/libros/juguetes/radio/cajafuerte,joyas/dinero/testamento/escrituras
-Baño,living,NULL,dormitorio2,dormitorio1, lampara/espejo,NULL
-Living,NULL,baño,NULL,comedor, libros/pinturas/tocadiscos/vinilos/estatuillas/antiguedades/TVantigua ,NULL
-Comedor,NULL,NULL,living,NULL, electrodosmesticos/vajillaporcelana/cubierosantiguos/vinosañejados/copas,NULL
+Dormitorio1,Living,Baño,Dormitorio2,NO,lampara/tocadisco/vinilos/joyero/radio ,NO 
+Dormitorio2,Living,Baño,NO,Dormitorio1,lampara/libros/juguetes/radio/cajafuerte ,joyas/dinero/testamento/escrituras 
+Baño,Living,NO,Dormitorio2,Dormitorio1,lampara/espejo ,NO 
+Living,NO,Baño,NO,Comedor,libros/pinturas/tocadiscos/vinilos/estatuillas/antiguedades/TVantigua ,NO 
+Comedor,NO,NO,Living,NO,electrodosmesticos/vajillaporcelana/cubierosantiguos/vinosañejados/copas ,NO 

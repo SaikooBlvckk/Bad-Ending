@@ -133,14 +133,9 @@ void import_file(char *file, HashMap *Map) {
   }
 }
 
-HashMap *importHouse(){
+HashMap *importHouse(char file[50]){
   int i = 1;
-  char *file;
   HashMap *Map = createMap(10);
-  file = (char *)malloc(sizeof(char) * 50);
-
-  file = "./Casas/Casa-Dificil-1.csv";
   import_file(file, Map);
-
   return Map;
 }

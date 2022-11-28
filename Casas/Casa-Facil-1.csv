@@ -1,6 +1,6 @@
 habitacion,conexion arriba,conexion abajo,conexion izq,conexion der, items, cofre
-Dormitorio living,NULL,NULL,NULL, cajafuerte/lampara,NULL
-Living garaje,dormitorio,comedor,baño TV,NULL
-Comedor NULL,NULL,NULL,living vajilla,electrodomesticos ,NULL
-Baño NULL,NULL,living,NULL, espejo,lampara,NULL
-Garaje,NULL,living,NULL,NULL bicicleta/materiales,NULL
+Dormitorio,Living,NO,NO,NO,cajafuerte/lampara ,NO 
+Living,Garaje,Dormitorio,Comedor,Baño,TV ,NO 
+Comedor,NO,NO,NO,Living,vajilla/electrodomesticos ,NO 
+Baño,NO,NO,Living,NO,espejo/lampara ,NO 
+Garaje,NO,Living,NO,NO,bicicleta/materiales ,NO 
