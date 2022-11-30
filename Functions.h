@@ -16,5 +16,10 @@ Pair *searchRoom();
 Room *changeRoom();
 void sleepProgram();
 void printBag();
+int passedLevel();
+void stealItem();
+Item *steal();
+
+void chamullo();
 
 #endif /* Funtions_h*/

@@ -20,6 +20,7 @@
 typedef struct{
     char Name[30];
     HashMap *PassedLevel;
+    List *Robbeditems;
 }Player;
 
 // Main Code
@@ -55,14 +56,17 @@ void select_option(){
         switch(choice){
             case 1:
                 printf("Jugar!\n");
-                Player *pl = (Player *)Malloc(sizeof(Player));
+                Player *pl = (Player *)malloc(sizeof(Player));
                 pl->PassedLevel = createMap(1);
+                pl->Robbeditems = createList();
                 printf("Ingrese su nombre de usuario\n");
                 scanf("%s", &pl->Name);
                 play_game(pl);
                 break;
             case 2:
                 printf("Cargar Partida!\n");
+                system(C);
+                chamullo();
                 break;
             case 3:
                 printf("Instrucciones!\n");
@@ -82,27 +86,36 @@ void select_option(){
 
 void play_game(Player *pl){
     char file[50];
-    int choice, choice2;
-    printf("Seleccione el nivel que desea jugar\n");
-    printf("1-. Casa nivel facil\n");
-    printf("2-. Casa nivel medio\n");
-    printf("3-. Casa nivel dificil\n");
-    scanf("%d",&choice);
-    switch (choice){
-        case 1:
-            strcpy(file, "./Casas/Casa-Facil-1.csv");
-        case 2:
-            strcpy(file, "./Casas/Casa-Medio-1.csv");
-        case 3:
-            strcpy(file, "./Casas/Casa-Dificil-1.csv");
-    }
+    int choice, choice2, choice3;
+    do{
+        printf("Seleccione el nivel que desea jugar\n");
+        printf("1-. Casa nivel facil\n");
+        printf("2-. Casa nivel medio\n");
+        printf("3-. Casa nivel dificil\n");
+        scanf("%d",&choice);
+        switch (choice){
+            case 1:
+                strcpy(file, "./Casas/Casa-Facil-1.csv");
+                break;
+            case 2:
+                strcpy(file, "./Casas/Casa-Medio-1.csv");
+                break;
+            case 3:
+                strcpy(file, "./Casas/Casa-Dificil-1.csv");
+                break;
+        }
+        choice2 = passedLevel(file, pl->PassedLevel);
+    }while(choice2 != 2);
     sleepProgram();
     HashMap *Map = importHouse(file);
-    bad_ending(Map);
+    List *bag = createList();
+    bad_ending(Map, bag);
+    pushBack(pl->Robbeditems, bag);
     insertMap(pl->PassedLevel, file, file);
     printf("Quieres seguir jugando?\n");
     printf("1.- Si\n2.- No\n");
-    if(choice2 == 1) play_game(pl);
+    scanf("%d", &choice3);
+    if(choice3 == 1) play_game(pl);
 }
 
 void load_game(){
@@ -119,10 +132,10 @@ void score_table(){
     scanf("%s", &enter);
 }
 
-void bad_ending(HashMap *Map){
-    List *bag = createList();
+void bad_ending(HashMap *Map, List *bag){
     char a[5];
-    int i = 0;
+    int i = 0, box;
+    box = rand() % 100 + 1;
     system(C);
     printf("Tomas una bocanada de aire y te decides a entrar por...\n");
 
@@ -148,7 +161,7 @@ void bad_ending(HashMap *Map){
     printf("Una vez dentro...\n");
     while(1){
         printf("Que deseas hacer?\n");
-        i = printRoomItems(room);
+        i = printRoomItems(room->items);
         printf("%d-. Cambiar de habitacion\n", ++i);
         printf("%d-. Salir de la casa\n", ++i);
         printf("%d-. Revisar mochila\n", ++i);
@@ -162,31 +175,21 @@ void bad_ending(HashMap *Map){
         }else if (choice == i - 2){
             room = changeRoom(room, aux, Map);
         }else{
-            int j = -1;
-            Item *itemaux = firstList(room->items);
-            do{
-                j++;
-                if (j == choice-1) break;
-                else itemaux = nextList(room->items);
-            }while(j == choice);
-            printf("Tomas %s y lo guardas en tu mochila\n", itemaux->name);
-            pushBack(bag, itemaux);
-            popCurrent(room->items);
+            stealItem(choice, room, box, bag);
         }
         sleepProgram();
         system(C);
     }
-    
 }
 
-int printRoomItems(Room *room){
+int printRoomItems(List *room){
     printf("--Robar--\n");
     int i = 0;
-    Item *item = firstList(room->items);
+    Item *item = firstList(room);
     if (item == NULL) return i;
     do{
         printf("%d-. %s\n", ++i, item->name);
-        item = nextList(room->items);
+        item = nextList(room);
     }while(item != NULL);
     printf("------\n");
     return i;
@@ -250,4 +253,66 @@ void printBag(List *bag){
             item = nextList(bag);
         }while(item != NULL);
     }else printf("No tienes items en tu mochila\n");
+}
+
+int passedLevel(char *file, HashMap *pl){
+    int choice = 2;
+    if (searchMap(pl,file) != NULL){
+        printf("Nivel ya jugado, deseas repetirlo?\n1-. Si\n2-. No\n");\
+        scanf("%d", &choice);
+        return choice;
+    }else return choice;
+}
+
+void stealItem(int choice, Room *room, int box, List *bag){
+    system(C);
+    int j = -1, choice2, choice3;
+    Item *itemaux = firstList(room->items);
+    itemaux = steal(j, choice, itemaux, room->items);
+    if(strcmp(itemaux->name, "cajafuerte") == 0){
+        if(box & 2 == 0){
+            printf("Lograste abrirla!\n");
+            j = -1;
+            int i = printRoomItems(room->cofre);
+            scanf("%d", &choice2);
+            if(i < choice2){
+                printf("Opcion incorrecta\n");
+                stealItem(choice, room, box, bag);
+            }else{
+                itemaux = steal(j, choice2, itemaux, room->cofre);
+                printf("Tomas %s y lo guardas en tu mochila\n", itemaux->name);
+                pushBack(bag, itemaux);
+                popCurrent(room->cofre);
+            }
+        }else{
+            printf("No lograste abrirla, deseas intentarlo de nuevo?\n1-. Si\n2-. No\n");
+            scanf("%d", &choice3);
+            if (choice3 == 1){
+                box = rand() % 100 + 1;
+                stealItem(choice, room, box, bag);
+            }
+        }
+    }else{
+        printf("Tomas %s y lo guardas en tu mochila\n", itemaux->name);
+        pushBack(bag, itemaux);
+        popCurrent(room->items);
+    }
+}
+Item *steal(int j, int choice, Item *itemaux, List *room){
+    do{
+        j++;
+        if (j == choice-1) break;
+        else itemaux = nextList(room);
+    }while(j == choice);
+    return itemaux;
+}
+
+
+void chamullo(){
+    printf("Entras al Living y los duenos de la casa te ven, llaman a la policia\n");
+    printf("Ellos te retienen el tiempo suficiente para que la policia llegue...\n");
+    printf("Te llevan detenido...\n");
+    printf("Te caen 5 anos y 1 dia de condena...\n");
+    printf("GAME OVER\n");
+    scanf("%d");
 }
