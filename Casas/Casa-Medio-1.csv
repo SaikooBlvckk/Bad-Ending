@@ -2,5 +2,5 @@ habitacion,conexion arriba,conexion abajo,conexion izq,conexion der, items, cofr
 Dormitorio1,Living,Baño,Dormitorio2,NO,lampara/tocadisco/vinilos/joyero/radio ,NO 
 Dormitorio2,Living,Baño,NO,Dormitorio1,lampara/libros/juguetes/radio/cajafuerte ,joyas/dinero/testamento/escrituras 
 Baño,Living,NO,Dormitorio2,Dormitorio1,lampara/espejo ,NO 
-Living,NO,Baño,NO,Comedor,libros/pinturas/tocadiscos/vinilos/estatuillas/antiguedades/TVantigua ,NO 
-Comedor,NO,NO,Living,NO,electrodosmesticos/vajillaporcelana/cubierosantiguos/vinosañejados/copas ,NO 
+Living,NO,Baño,NO,Comedor,libros/pinturas/tocadiscos/vinilos/estatuillas/antiguedades/TV ,NO 
+Comedor,NO,NO,Living,NO,electrodosmesticos/vajillaporcelana/cubiertosantiguos/vinosañejados/copas ,NO 

@@ -18,7 +18,9 @@ void sleepProgram();
 void printBag();
 int passedLevel();
 int stealItem();
-
-void chamullo();
+int movementInteractions();
+void getOut();
+int theyComeBack();
+int endGame();
 
 #endif /* Funtions_h*/
