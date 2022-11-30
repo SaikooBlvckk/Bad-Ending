@@ -1,0 +1,6 @@
+"habitacion,conexion arriba,conexion abajo,conexion izq,conexion der, items, cofre"
+"Living,Cocina,NO,NO,Baño, cuadros/escultura ,NO"
+"Dormitorio, Bodega,Living, Cocina, Baño, pc/celular ,NO"
+"Cocina, Baño, NO, Living, Baño, reloj,tragosimportacion ,NO"
+"Baño,NO,Dormitorio,Living,NO, espejo/lampara ,NO"
+"Bodega,Cocina,Living,NO,NO,herramientas,dinero ,dinero/testamento"
