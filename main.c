@@ -135,7 +135,7 @@ void score_table(){
 void bad_ending(HashMap *Map, List *bag){
     char a[5];
     int i = 0, box;
-    box = rand() % 100 + 1;
+    box = rand() % 100;
     system(C);
     printf("Tomas una bocanada de aire y te decides a entrar por...\n");
 
@@ -175,7 +175,7 @@ void bad_ending(HashMap *Map, List *bag){
         }else if (choice == i - 2){
             room = changeRoom(room, aux, Map);
         }else{
-            stealItem(choice, room, box, bag);
+            box = stealItem(choice, room, box, bag);
         }
         sleepProgram();
         system(C);
@@ -240,7 +240,7 @@ void sleepProgram(){
 #ifdef _WIN32
 	 Sleep(1000);
 #else
-	 usleep(100000);
+	 usleep(1000000);
 #endif
 }
 
@@ -249,7 +249,7 @@ void printBag(List *bag){
     if(item !=  NULL){
         printf("En la mochila tienes los siguientes items\n");
         do{
-            printf("%s\n",item->name);
+            printf("%s precio: %d peso: %d\n",item->name, item->price, item->weight);
             item = nextList(bag);
         }while(item != NULL);
     }else printf("No tienes items en tu mochila\n");
@@ -264,32 +264,42 @@ int passedLevel(char *file, HashMap *pl){
     }else return choice;
 }
 
-void stealItem(int choice, Room *room, int box, List *bag){
+int stealItem(int choice, Room *room, int box, List *bag){
     system(C);
     int j = -1, choice2, choice3;
     Item *itemaux = firstList(room->items);
-    itemaux = steal(j, choice, itemaux, room->items);
+    do{
+        j++;
+        if (j == choice-1) break;
+        else itemaux = nextList(room->items);
+    }while(j != choice);
     if(strcmp(itemaux->name, "cajafuerte") == 0){
-        if(box & 2 == 0){
+        if(box % 2 == 0){
             printf("Lograste abrirla!\n");
             j = -1;
             int i = printRoomItems(room->cofre);
             scanf("%d", &choice2);
             if(i < choice2){
                 printf("Opcion incorrecta\n");
-                stealItem(choice, room, box, bag);
+                box = stealItem(choice, room, box, bag);
             }else{
-                itemaux = steal(j, choice2, itemaux, room->cofre);
-                printf("Tomas %s y lo guardas en tu mochila\n", itemaux->name);
-                pushBack(bag, itemaux);
+                Item *itemauxbox = firstList(room->cofre);
+                do{
+                    j++;
+                    if (j == choice2-1) break;
+                    else itemauxbox = nextList(room->cofre);
+                }while(j != choice2);
+                printf("Tomas %s y lo guardas en tu mochila\n", itemauxbox->name);
+                pushBack(bag, itemauxbox);
                 popCurrent(room->cofre);
             }
+            if(firstList(room->cofre) == NULL) popCurrent(room->items);
         }else{
             printf("No lograste abrirla, deseas intentarlo de nuevo?\n1-. Si\n2-. No\n");
             scanf("%d", &choice3);
             if (choice3 == 1){
-                box = rand() % 100 + 1;
-                stealItem(choice, room, box, bag);
+                box = rand() % 100;
+                box = stealItem(choice, room, box, bag);
             }
         }
     }else{
@@ -297,14 +307,7 @@ void stealItem(int choice, Room *room, int box, List *bag){
         pushBack(bag, itemaux);
         popCurrent(room->items);
     }
-}
-Item *steal(int j, int choice, Item *itemaux, List *room){
-    do{
-        j++;
-        if (j == choice-1) break;
-        else itemaux = nextList(room);
-    }while(j == choice);
-    return itemaux;
+    return box;
 }
 
 

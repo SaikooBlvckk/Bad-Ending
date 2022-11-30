@@ -17,8 +17,7 @@ Room *changeRoom();
 void sleepProgram();
 void printBag();
 int passedLevel();
-void stealItem();
-Item *steal();
+int stealItem();
 
 void chamullo();
 
