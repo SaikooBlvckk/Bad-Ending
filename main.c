@@ -46,6 +46,7 @@ void select_option(){
     int choice = -1;
     Player *pl = (Player *)malloc(sizeof(Player));
     while (choice != 0){
+        char a[5];
         menu();
         printf("Seleccione una opción\n");
         scanf("%d", &choice);
@@ -69,7 +70,6 @@ void select_option(){
                 system(C);
                 break;
             case 3:
-                char a[5];
                 printf("--Instrucciones--\n");
                 printf("Saldran por pantalla las opciones a realizar enumeradas\n");
                 printf("Por consola tendras que ingresar el numero de la opcion elegida\n");
@@ -78,6 +78,7 @@ void select_option(){
                 break;
             case 4:
                 printScoreTable();
+                scanf("%s", &a);
                 break;
             case 0:
                 printf("Saliendo del juego :(\n");
@@ -121,17 +122,17 @@ void play_game(Player *pl){
         
         switch (choice){
             case 1:
-                if(lvl == 2) strcpy(file, "./Casas/Casa-Facil-1.csv");
+                if(lvl == 1) strcpy(file, "./Casas/Casa-Facil-1.csv");
                 else if (lvl == 2) strcpy(file, "./Casas/Casa-Facil-2.csv");
                 else strcpy(file, "./Casas/Casa-Facil-3.csv");
                 break;
             case 2:
-                if(lvl == 2) strcpy(file, "./Casas/Casa-Medio-1.csv");
+                if(lvl == 1) strcpy(file, "./Casas/Casa-Medio-1.csv");
                 else if (lvl == 2) strcpy(file, "./Casas/Casa-Medio-2.csv");
                 else strcpy(file, "./Casas/Casa-Medio-3.csv");
                 break;
             case 3:
-                if(lvl == 2) strcpy(file, "./Casas/Casa-Dificil-1.csv");
+                if(lvl == 1) strcpy(file, "./Casas/Casa-Dificil-1.csv");
                 else if (lvl == 2) strcpy(file, "./Casas/Casa-Dificil-2.csv");
                 else strcpy(file, "./Casas/Casa-Dificil-3.csv");
                 break;
@@ -173,6 +174,7 @@ void createScoreTable(Player *pl){
     fprintf(fp,"%d,",total);
     puntaje = (pl->playerMovement * total) / 200;
     fprintf(fp,"%d\n",puntaje);
+    fclose(fp);
 }
 
 void bad_ending(HashMap *Map, List *bag, Player *pl){
