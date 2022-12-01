@@ -69,10 +69,15 @@ void select_option(){
                 system(C);
                 break;
             case 3:
-                printf("Instrucciones!\n");
+                char a[5];
+                printf("--Instrucciones--\n");
+                printf("Saldran por pantalla las opciones a realizar enumeradas\n");
+                printf("Por consola tendras que ingresar el numero de la opcion elegida\n");
+                printf("Ingrese un caracter y pulse enter para continuar\n");
+                scanf("%s", &a);
                 break;
             case 4:
-                printf("Tabla de puntajes!\n");
+                printScoreTable();
                 break;
             case 0:
                 printf("Saliendo del juego :(\n");
@@ -134,13 +139,30 @@ void play_game(Player *pl){
     printf("1.- Si\n2.- No\n");
     scanf("%d", &choice3);
     if(choice3 == 1) play_game(pl);
-    else saveGame(pl);
+    else{
+        saveGame(pl);
+        createScoreTable(pl);
+    }
 }
 
-void score_table(){
-    printf("Aquí se imprimirá la tabla de puntuaciones por usuario ordenada de mayor a menor puntaje\n");
-    char enter[5];
-    scanf("%s", &enter);
+void createScoreTable(Player *pl){
+    FILE *fp = fopen("scoreTable.csv", "a");
+    int total = 0, puntaje;
+    fprintf(fp, "%s,%d,",pl->Name,pl->playerMovement);
+    List *itemListAux = firstList(pl->Robbeditems);
+    Item *itemAux;
+    do{
+        itemAux = firstList(itemListAux);
+        do{
+            total += itemAux->price;
+            itemAux = nextList(itemListAux);
+        } while (itemAux != NULL);
+        itemListAux = nextList(pl->Robbeditems);
+    } while (itemListAux != NULL);
+
+    fprintf(fp,"%d,",total);
+    puntaje = (pl->playerMovement * total) / 200;
+    fprintf(fp,"%d\n",puntaje);
 }
 
 void bad_ending(HashMap *Map, List *bag, Player *pl){

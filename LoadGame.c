@@ -74,3 +74,15 @@ Player *loadGame(){
   }
   return pl;
 }
+
+void printScoreTable(){
+  FILE *fp = fopen("scoreTable.csv", "w");
+  char line[1024];
+  if (fp == NULL) printf("Error al abrir archivo de la tabla de puntuaciones\n");
+  else{
+    printf("Player, Movimientos, Dinero Total Robado, Puntaje");
+    while(fgets(line, 1023, fp) != NULL){
+      printf("%s, %s, %s, %s",get_csv_field(line, 0), get_csv_field(line, 1), get_csv_field(line, 2), get_csv_field(line, 3));
+    }
+  }
+}

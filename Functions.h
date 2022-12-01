@@ -16,7 +16,7 @@ void print_title();
 void select_option();
 void play_game();
 void saveGame();
-void score_table();
+void createScoreTable();
 void bad_ending();
 int printRoomItems();
 void printOtherRooms();

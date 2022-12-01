@@ -5,3 +5,4 @@ open.c
 .vscode
 *.exe
 Ricky.csv
+scoreTable.csv
