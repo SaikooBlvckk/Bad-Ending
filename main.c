@@ -1,14 +1,14 @@
 #include <stdio.h>
-#include "loadingBar.c"
-#include "Functions.h"
-#include "charge-house.c"
-#include "list.h"
-#include "hashmap.h"
-#include "LoadGame.c"
+#include "loadingBar.c" // Archivo para mostrar la barra de carga
+#include "Functions.h" // Header para las funciones
+#include "charge-house.c" // Archivo para cargar las casas
+#include "list.h" // Header para las funciones de List.c
+#include "hashmap.h" // Header para las funciones de List.h
+#include "LoadGame.c" // Archivo para cargar partida y mostrar la tabla d puntajes
 
 // Verification if is Windows or Linux
 
-#ifdef _WIN32
+#ifdef _WIN32 // Sirve para verificar si el usuario esta en linux o windows
 	#include <windows.h>
     #define C "cls"
 #else
@@ -20,19 +20,19 @@
 
 // Main Code
 
-int main(){
+int main(){ // Main
     print_title();
     select_option();
 }
 
-void print_title(){
+void print_title(){ // Imprimee el titulo del jeugo y llama a a funcion para poner la barra de carga
     system(C);
     printf("%30s\n", TITLE);
     loadingBar();
     printf("\n");
 }
 
-void menu(){
+void menu(){ // sirve para imprimir el menu del juego
     system(C);
     printf("%30s\n", TITLE);
     printf("1. Jugar!\n");
@@ -42,7 +42,7 @@ void menu(){
     printf("0. Salir del juego\n");
 }
 
-void select_option(){
+void select_option(){ //funcion principal para seleccionar que es lo que el usuario quiere hacer
     int choice = -1;
     Player *pl = (Player *)malloc(sizeof(Player));
     while (choice != 0){
@@ -50,7 +50,7 @@ void select_option(){
         printf("Seleccione una opción\n");
         scanf("%d", &choice);
         switch(choice){
-            case 1:
+            case 1: // en esta parte el usuario da inicio a jugar
                 printf("Jugar!\n");
                 pl->PassedLevel = createMap(1);
                 pl->Robbeditems = createList();
@@ -58,7 +58,7 @@ void select_option(){
                 scanf("%s", &pl->Name);
                 play_game(pl);
                 break;
-            case 2:
+            case 2: // en esta parte el usuario puede cargar la partida anterior
                 pl = loadGame();
                 if (pl == NULL) pl = (Player *)malloc(sizeof(Player));
                 else{
@@ -68,7 +68,7 @@ void select_option(){
                 }
                 system(C);
                 break;
-            case 3:
+            case 3: // se imprime una breve descripcion de como se juega
                 char a[5];
                 printf("--Instrucciones--\n");
                 printf("Saldran por pantalla las opciones a realizar enumeradas\n");
@@ -76,10 +76,10 @@ void select_option(){
                 printf("Ingrese un caracter y pulse enter para continuar\n");
                 scanf("%s", &a);
                 break;
-            case 4:
+            case 4: // imprime la tabla de puntajes
                 printScoreTable();
                 break;
-            case 0:
+            case 0: // finaliza el juego
                 printf("Saliendo del juego :(\n");
                 return;
             default:
@@ -89,7 +89,7 @@ void select_option(){
     }
 }
 
-void saveGame(Player *pl){
+void saveGame(Player *pl){ // funcion para generar un .csv donde se guardan los datos del jugador
     char file[30];
     strcpy(file, pl->Name);
     strncat(file,".csv", 15);
@@ -105,7 +105,7 @@ void saveGame(Player *pl){
     fclose(fp);
 }
 
-void play_game(Player *pl){
+void play_game(Player *pl){ // funcion que da inicio al juego
     char file[50];
     int choice, choice2, choice3, lvl;
     do{
@@ -119,7 +119,7 @@ void play_game(Player *pl){
         printf("1-. Nivel 1\n2-. Nivel 2\n3-. Nivel 3\n");
         scanf("%d", &lvl);
         
-        switch (choice){
+        switch (choice){ // en esta parte el jugador selecciona que casa jugará
             case 1:
                 if(lvl == 2) strcpy(file, "./Casas/Casa-Facil-1.csv");
                 else if (lvl == 2) strcpy(file, "./Casas/Casa-Facil-2.csv");
@@ -142,7 +142,7 @@ void play_game(Player *pl){
     HashMap *Map = importHouse(file);
     List *bag = createList();
     pl->playerMovement = 0;
-    bad_ending(Map, bag, pl);
+    bad_ending(Map, bag, pl); // aqui se da inicio al juego
     pushBack(pl->Robbeditems, bag);
     insertMap(pl->PassedLevel, file, pl);   
     printf("Quieres seguir jugando?\n");
@@ -155,7 +155,7 @@ void play_game(Player *pl){
     }
 }
 
-void createScoreTable(Player *pl){
+void createScoreTable(Player *pl){ // se crea la tabla de puntuaciones NO ALCANZAMOS A ORDENARLA :(
     FILE *fp = fopen("scoreTable.csv", "a");
     int total = 0, puntaje;
     fprintf(fp, "%s,%d,",pl->Name,pl->playerMovement);
@@ -175,7 +175,7 @@ void createScoreTable(Player *pl){
     fprintf(fp,"%d\n",puntaje);
 }
 
-void bad_ending(HashMap *Map, List *bag, Player *pl){
+void bad_ending(HashMap *Map, List *bag, Player *pl){ // El juego
     int i = 0, box;
     box = rand() % 100;
     system(C);
@@ -189,7 +189,7 @@ void bad_ending(HashMap *Map, List *bag, Player *pl){
         aux = nextMap(Map);
     }while(aux != NULL);
     int choice;
-    scanf("%d", &choice);
+    scanf("%d", &choice); // Se eligue la habitacion por la cual se entrara a a la casa
     i = -1;
     aux = firstMap(Map);
     do{
@@ -201,37 +201,37 @@ void bad_ending(HashMap *Map, List *bag, Player *pl){
     system(C);
     printf("Eliges entrar por %s... Tal vez sea la mejor opcion\n", room->name);
     printf("Una vez dentro...\n");
-    while(1){
-        int interactions = movementInteractions(pl, bag, room->name);
+    while(1){ // da inicio al bucle del juego
+        int interactions = movementInteractions(pl, bag, room->name); // verificador de interacciones con el usuario
         if(interactions == 2){
-            getOut(room, aux, Map, pl);
+            getOut(room, aux, Map, pl); // funcion por si el usuario quiere salir del juego
             sleepProgram();
             return;
         }
         printf("Que deseas hacer?\n");
-        i = printRoomItems(room->items);
+        i = printRoomItems(room->items); // imprime los items de las habitaciones
         printf("%d-. Cambiar de habitacion\n", ++i);
         printf("%d-. Salir de la casa\n", ++i);
         printf("%d-. Revisar mochila\n", ++i);
-        scanf("%d", &choice);
+        scanf("%d", &choice); // se selecciona que quiere hacer el usuario
         if(choice == i){
-            printBag(bag);
+            printBag(bag); // imprime la mochila del usuario
         }else if (choice == i - 1){
             getOut(room, aux, Map, pl);
             sleepProgram();
             return;
         }else if (choice == i - 2){
-            room = changeRoom(room, aux, Map, pl);
+            room = changeRoom(room, aux, Map, pl); // cambia de habitacion
         }else{
-            box = stealItem(choice, room, box, bag, pl);
+            box = stealItem(choice, room, box, bag, pl); //roba un item
         }
         sleepProgram();
         system(C);
-        pl->playerMovement++;
+        pl->playerMovement++; // contador de movimiento para interacciones
     }
 }
 
-int printRoomItems(List *room){
+int printRoomItems(List *room){ // imprime el item de las habitaciones
     printf("--Robar--\n");
     int i = 0;
     Item *item = firstList(room);
@@ -244,7 +244,7 @@ int printRoomItems(List *room){
     return i;
 }
 
-void printOtherRooms(Room *room){
+void printOtherRooms(Room *room){ // imprime las otras habitaciones cercanas
     if (strcmp(room->up, "NO") != 0)
         printf("%d-. ir a %s\n", 1, room->up);
     if (strcmp(room->down, "NO") != 0)
@@ -257,7 +257,7 @@ void printOtherRooms(Room *room){
         printf("%d-. ir a %s\n", 4, room->right);
 }
 
-Room *changeRoom(Room *room, Pair *aux, HashMap *Map, Player *pl){
+Room *changeRoom(Room *room, Pair *aux, HashMap *Map, Player *pl){ // cambia de habitacion
     int nextRoom;
     printOtherRooms(room);
     scanf("%d",&nextRoom);
@@ -293,7 +293,7 @@ Room *changeRoom(Room *room, Pair *aux, HashMap *Map, Player *pl){
     return room;
 }
 
-void sleepProgram(){
+void sleepProgram(){ // funcion para verificar el sleep linux o windows
 #ifdef _WIN32
 	 Sleep(1000);
 #else
@@ -315,7 +315,7 @@ void printBag(List *bag){
     scanf("%s", &a);
 }
 
-int passedLevel(char *file, HashMap *pl){
+int passedLevel(char *file, HashMap *pl){ // para verificar los niveles que se jugaron
     int choice = 1;
     if (searchMap(pl,file) != NULL){
         printf("Nivel ya jugado, deseas repetirlo?(Se borraran los datos de la partida anterior)\n1-. Si\n2-. No\n");\
@@ -325,7 +325,7 @@ int passedLevel(char *file, HashMap *pl){
     }else return choice;
 }
 
-int stealItem(int choice, Room *room, int box, List *bag, Player *pl){
+int stealItem(int choice, Room *room, int box, List *bag, Player *pl){ //funcion para robar un item
     system(C);
     int j = -1, choice2, choice3;
     Item *itemaux = firstList(room->items);
@@ -374,7 +374,7 @@ int stealItem(int choice, Room *room, int box, List *bag, Player *pl){
     return box;
 }
 
-int movementInteractions(Player *pl, List *bag, char *room){
+int movementInteractions(Player *pl, List *bag, char *room){ // funcion para interacciones por movimiento
     Item *itemaux = firstList(bag);
     if (itemaux == NULL) return 0;
     int totalWeight = 0;
@@ -393,7 +393,7 @@ int movementInteractions(Player *pl, List *bag, char *room){
     return 0;
 }
 
-void getOut(Room *room, Pair *aux, HashMap *Map, Player *pl){
+void getOut(Room *room, Pair *aux, HashMap *Map, Player *pl){ // funcion apra salir de la casa
     while (1){
         int cantWindows = 0;
         if (strcmp(room->up, "NO") == 0) cantWindows++;
@@ -411,7 +411,7 @@ void getOut(Room *room, Pair *aux, HashMap *Map, Player *pl){
     }
 }
 
-int theyComeBack(){
+int theyComeBack(){ // funcion que avisa una de las interacciones
     printf("Escuchas un ruido afuera de la casa, vez por la ventana y...\n");
     printf("SON LOS DUENOS DE LA CASA, LLEGARON!\n");
     printf("Que deseas hacer?\n1-. Continuar robo\n2-. Salir de la casa YA!\n");
@@ -420,7 +420,7 @@ int theyComeBack(){
     return choice;
 }
 
-int endGame(){
+int endGame(){// funcion que avisa una de las interacciones (se finaliza el juego perdiendo)
     char a[5];
     printf("Entras al Living y los duenos de la casa te ven, llaman a la policia\n");
     printf("Ellos te retienen el tiempo suficiente para que la policia llegue...\n");
