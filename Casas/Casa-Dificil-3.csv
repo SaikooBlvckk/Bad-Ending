@@ -1,0 +1,10 @@
+habitacion donde esta, conexion arriba, conexion abajo, conexion izq,conexion derecha,items,cofre
+comedor,living,NO,NO,baño1,frutero/mantel/copas ,NO 
+living,cocina,comedor,NO,pasillo,piano/parlante/cojines/lampara/cuadros ,NO 
+cocina,NO,NO,living,NO,termo/cafetera/hervidor/dispensadorDeAgua ,NO 
+baño1,NO,NO,comedor,NO,toallas/alfombra/sacadorDePelo/bata ,NO 
+pasillo,habitacion1,oficina,pasillo,habitacion2,cuadros/fotosFamiliares/lampara/alfombra ,NO 
+habitacion1,NO,pasillo,NO,baño2, relojes/ lampara/cubreColchon/sandalias/joyeria/libros ,NO 
+habitacion2,NO,NO,pasillo,NO,gameboy/nintendoSuper/micrófono/cámara/guitarra ,NO 
+baño2,NO,NO,habitacion1,NO,rizador/espejoPequeño/RasuradoraElectrica ,NO 
+oficina,pasillo,NO,NO,NO,pc/tv/impresora/teclado/bandejaPortapales ,NO 

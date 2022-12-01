@@ -107,7 +107,7 @@ void saveGame(Player *pl){
 
 void play_game(Player *pl){
     char file[50];
-    int choice, choice2, choice3;
+    int choice, choice2, choice3, lvl;
     do{
         system(C);
         printf("Seleccione el nivel que desea jugar\n");
@@ -115,15 +115,25 @@ void play_game(Player *pl){
         printf("2-. Casa nivel medio\n");
         printf("3-. Casa nivel dificil\n");
         scanf("%d",&choice);
+        
+        printf("1-. Nivel 1\n2-. Nivel 2\n3-. Nivel 3\n");
+        scanf("%d", &lvl);
+        
         switch (choice){
             case 1:
-                strcpy(file, "./Casas/Casa-Facil-1.csv");
+                if(lvl == 2) strcpy(file, "./Casas/Casa-Facil-1.csv");
+                else if (lvl == 2) strcpy(file, "./Casas/Casa-Facil-2.csv");
+                else strcpy(file, "./Casas/Casa-Facil-3.csv");
                 break;
             case 2:
-                strcpy(file, "./Casas/Casa-Medio-1.csv");
+                if(lvl == 2) strcpy(file, "./Casas/Casa-Medio-1.csv");
+                else if (lvl == 2) strcpy(file, "./Casas/Casa-Medio-2.csv");
+                else strcpy(file, "./Casas/Casa-Medio-3.csv");
                 break;
             case 3:
-                strcpy(file, "./Casas/Casa-Dificil-1.csv");
+                if(lvl == 2) strcpy(file, "./Casas/Casa-Dificil-1.csv");
+                else if (lvl == 2) strcpy(file, "./Casas/Casa-Dificil-2.csv");
+                else strcpy(file, "./Casas/Casa-Dificil-3.csv");
                 break;
         }
         choice2 = passedLevel(file, pl->PassedLevel);
@@ -404,7 +414,7 @@ void getOut(Room *room, Pair *aux, HashMap *Map, Player *pl){
 int theyComeBack(){
     printf("Escuchas un ruido afuera de la casa, vez por la ventana y...\n");
     printf("SON LOS DUENOS DE LA CASA, LLEGARON!\n");
-    printf("Que deseas hacer?\n1-. Continuar robo\n 2-. Salir de la casa YA!\n");
+    printf("Que deseas hacer?\n1-. Continuar robo\n2-. Salir de la casa YA!\n");
     int choice;
     scanf("%d", &choice);
     return choice;

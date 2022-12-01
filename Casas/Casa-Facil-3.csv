@@ -1,0 +1,6 @@
+habitacion donde esta, conexion arriba, conexion abajo, conexion izq,conexion derecha,items,cofre
+living,cocina,habitacion,baño,oficina,velas/cafetera/radio/jarron ,NO 
+cocina,NO,living,NO,NO,cubiertos/copas/maquinaDePalomitas/hervidor ,NO 
+habitacion,living,NO,baño,oficina,pc/lentes/lampara/humificador/tv/wii ,NO 
+oficina,NO,habitacion,living,NO,pc/teclado/audífonos/corchetera/documentosDeRenta ,NO 
+baño,NO,habitacion,NO,living,toallas/secarDePelo/alisadora/confort ,NO 

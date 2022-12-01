@@ -1,0 +1,8 @@
+habitacion donde esta, conexion arriba, conexion abajo, conexion izq,conexion derecha,items,cofre
+living,cocina,pasillo,baño,habitacion1,florero/TV/estatuillaDeCristall ,NO 
+cocina,NO,living,NO,NO,cubiertosDePlata/sarten/batidora ,NO 
+habitacion1,NO,baño,living,NO,audífonos/perfumeVictoriaSecret/cajafuerte ,anilloDeOro/dinero 
+baño,habitacion1,NO,pasillo,NO,secadorDePelo /planchaDePelo ,NO 
+pasillo,living,habitacion2,NO,baño,fotografíaFamiliar/pinturaOleo ,NO 
+habitacion2,pasillo,NO,NO,NO,pc/cosmetiquero/audifonosInalambricos/xbox/pelotaFutbol/zapatillasNike/cadenaPlata ,NO 
+baño1,NO,NO,NO,living,toalla/sandalias/cremaHumectante ,NO 
