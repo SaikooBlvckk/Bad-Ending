@@ -1,0 +1,9 @@
+habitacion,conexion arriba,conexion abajo,conexion izq,conexion der,items,cofre
+Comedor,Dormitorio1,Living,Dormitorio3,Dormitorio2,joyas/tragos ,NO 
+Dormitorio1,Bano1,NO,Garaje,Living,computador/dinero/consola/parlante/audifonos ,NO 
+Dormitorio2,Living,Garaje,Bano2,NO,TV/ropa/lampara/cuadros/figuras ,NO 
+Bano1,NO,NO,Dormitorio1,NO,cuadro/espejo ,NO 
+Dormitorio3,NO,Dormitorio2,NO,Living,libros/joyas/camara/ropa/cajafuerte ,testamento/dinero/joyas/indulto 
+Bano2,Dormitorio2,NO,Comedor,NO,lampara,NO 
+Living,NO,Comedor,NO,Bano2,figura/electrodomesticos ,NO 
+Garaje,Dormitorio1,NO,NO,Dormitorio2,herramientas/materiales/llavesauto ,NO 

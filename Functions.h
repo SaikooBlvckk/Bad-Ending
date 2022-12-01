@@ -2,12 +2,20 @@
 #define Functions_h
 #include "hashmap.h"
 #include "chargeHouse.h"
+#include "list.h"
+
+typedef struct{
+    char Name[30];
+    HashMap *PassedLevel;
+    List *Robbeditems;
+    int playerMovement;
+}Player;
 
 void menu();
 void print_title();
 void select_option();
 void play_game();
-void load_game();
+void saveGame();
 void score_table();
 void bad_ending();
 int printRoomItems();

@@ -6,4 +6,4 @@ Bano1,NO,NO,NO,Dormitorio1,lampara/espejo ,NO
 Bano2,NO,Dormitorio2,Comedor,NO,lampara/espejo ,NO 
 Living,Comedor,Dormitorio1,Dormitorio3,Dormitorio2,pintura/TV/libros/electrodomesticos ,NO 
 Comedor,NO,Living,NO,Bano2,vasija/vajilla/electrodomesticos ,NO 
-Garaje,Dormitorio2,NO,Dormitorio1,NO,herramientas/auto/bicicleta/materiales ,NO 
+Garaje,Dormitorio2,NO,Dormitorio1,NO,herramientas/llavesauto/bicicletadejuguete/materiales ,NO 

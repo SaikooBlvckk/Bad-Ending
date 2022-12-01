@@ -4,6 +4,7 @@
 #include "charge-house.c"
 #include "list.h"
 #include "hashmap.h"
+#include "LoadGame.c"
 
 // Verification if is Windows or Linux
 
@@ -16,13 +17,6 @@
 #endif
 
 #define TITLE  "### Bad Ending ###"
-
-typedef struct{
-    char Name[30];
-    HashMap *PassedLevel;
-    List *Robbeditems;
-    int playerMovement;
-}Player;
 
 // Main Code
 
@@ -50,6 +44,7 @@ void menu(){
 
 void select_option(){
     int choice = -1;
+    Player *pl = (Player *)malloc(sizeof(Player));
     while (choice != 0){
         menu();
         printf("Seleccione una opción\n");
@@ -57,7 +52,6 @@ void select_option(){
         switch(choice){
             case 1:
                 printf("Jugar!\n");
-                Player *pl = (Player *)malloc(sizeof(Player));
                 pl->PassedLevel = createMap(1);
                 pl->Robbeditems = createList();
                 printf("Ingrese su nombre de usuario\n");
@@ -65,7 +59,13 @@ void select_option(){
                 play_game(pl);
                 break;
             case 2:
-                printf("Cargar Partida!\n");
+                pl = loadGame();
+                if (pl == NULL) pl = (Player *)malloc(sizeof(Player));
+                else{
+                    printf("Cargado con exito %s\n", pl->Name);
+                    sleepProgram();
+                    play_game(pl);
+                }
                 system(C);
                 break;
             case 3:
@@ -82,6 +82,22 @@ void select_option(){
                 break;
         }
     }
+}
+
+void saveGame(Player *pl){
+    char file[30];
+    strcpy(file, pl->Name);
+    strncat(file,".csv", 15);
+    FILE *fp = fopen(file, "w");
+    Pair *aux = firstMap(pl->PassedLevel);
+    Player *playerAux;
+    do{
+        playerAux = aux->value;
+        fprintf(fp, "%s,", pl->Name);
+        fprintf(fp,"%s\n",aux->key);
+        aux = nextMap(pl->PassedLevel);
+    }while(aux!= NULL);
+    fclose(fp);
 }
 
 void play_game(Player *pl){
@@ -113,19 +129,12 @@ void play_game(Player *pl){
     pl->playerMovement = 0;
     bad_ending(Map, bag, pl);
     pushBack(pl->Robbeditems, bag);
-    insertMap(pl->PassedLevel, file, pl);
+    insertMap(pl->PassedLevel, file, pl);   
     printf("Quieres seguir jugando?\n");
     printf("1.- Si\n2.- No\n");
     scanf("%d", &choice3);
     if(choice3 == 1) play_game(pl);
-}
-
-void load_game(){
-    printf("Aquí saldrá la opción para cargar partidas\n");
-    printf("la seleccion de partidas será colocando el nombre de usuarion que jugó (preseleccionado anteriormente)\n");
-    printf("y el programa buscará y cargará los datos del usuario\n");
-    char enter[5];
-    scanf("%s", &enter);
+    else saveGame(pl);
 }
 
 void score_table(){
@@ -166,7 +175,7 @@ void bad_ending(HashMap *Map, List *bag, Player *pl){
             getOut(room, aux, Map, pl);
             sleepProgram();
             return;
-        }else if(interactions)
+        }
         printf("Que deseas hacer?\n");
         i = printRoomItems(room->items);
         printf("%d-. Cambiar de habitacion\n", ++i);
@@ -346,8 +355,8 @@ int movementInteractions(Player *pl, List *bag, char *room){
     if(totalWeight <= 200 && 100 <= totalWeight) pl->playerMovement++;
     if(200 < totalWeight) pl->playerMovement += 2;
 
-    if(pl->playerMovement >= 50) return theyComeBack();
-    if(pl->playerMovement >= 75 && strcmp(room, "Living") == 0) return endGame();
+    if(pl->playerMovement >= 65 && strcmp(room, "Living") == 0) return endGame();
+    if(pl->playerMovement >= 40) return theyComeBack();
 
     return 0;
 }
