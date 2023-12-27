@@ -7,6 +7,7 @@
 #include "LoadGame.c" // Archivo para cargar partida y mostrar la tabla d puntajes
 
 // Verification if is Windows or Linux
+// esto es una prueba xd
 
 #ifdef _WIN32 // Sirve para verificar si el usuario esta en linux o windows
 	#include <windows.h>
